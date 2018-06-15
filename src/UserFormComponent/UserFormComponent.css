@@ -1,0 +1,55 @@
+
+.userForm {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.userForm * {
+  box-sizing: border-box;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.userForm--field {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  padding: 8px;
+  font-weight: 300;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.userForm--field > label {
+  padding: 15px;
+  flex: 1 0 30%;
+}
+
+.userForm--field > label + * {
+  padding: 15px;
+  flex: 1 0 70%;
+}
+
+.userForm--field button {
+  margin-left: auto;
+  padding: 8px 16px;
+  background-color: #DCDCDC;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+}
+
+.displayErrors input:invalid, .displayErrors textarea:invalid {
+  border-color: #f73772;
+}
+
+@media screen and (max-width: 600px) {
+  .userForm--field > label {
+    flex: 1 0 100%;
+  }
+  
+  .userForm--field > label + * {
+    flex: 1 0 100%;
+  }
+}
