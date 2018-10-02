@@ -1,6 +1,8 @@
 import React from 'react';
 
 import LoaderComponent from './../LoaderComponent/LoaderComponent'
+import ImageComponent from './../ImageComponent/ImageComponent'
+
 import './UserFormComponent.css';
 
 class UserFormComponent extends React.Component {
@@ -11,10 +13,12 @@ class UserFormComponent extends React.Component {
       displayErrors: false,
       name: '',
       email: '',
-      message: ''
+      message: '',
+      image: '',
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleImageAdded = this.handleImageAdded.bind(this)
   }
 
   handleChange(e) {
@@ -23,10 +27,16 @@ class UserFormComponent extends React.Component {
     })
   }
 
+  handleImageAdded(value) {
+    this.setState({
+      image : value
+    })
+  }
+
   handleSubmit(e){
-    const isUpdateInProgress = this.state.isUpdateInProgress;
+    const {isUpdateInProgress, image} = this.state;
     e.preventDefault()
-    if (!e.target.checkValidity()) {
+    if (!e.target.checkValidity() || !image) {
     	this.setState({
         invalid: true,
         displayErrors: true
@@ -41,14 +51,15 @@ class UserFormComponent extends React.Component {
         email: '',
         message: '',
         displayErrors: false,
-        isUpdateInProgress: false
+        isUpdateInProgress: false,
+        image: '',
       })
     }, 3000)
     return false
   }
 
   render() {
-    const { displayErrors } = this.state
+    const { displayErrors, image } = this.state
     return (
       <div className="userForm">
         <form 
@@ -89,6 +100,7 @@ class UserFormComponent extends React.Component {
               onChange={ this.handleChange }
             />
           </div>
+          <ImageComponent isImageAdded={this.handleImageAdded} imageUrl={image} showError={ displayErrors && !image } />
           <div className="userForm--field">
             <button type="submit">Submit</button>
           </div>
